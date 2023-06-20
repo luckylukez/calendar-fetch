@@ -1,4 +1,9 @@
 *.ics
 *.ical
+
 .cfg
 *.json
+
+set_environment_variables.py
+
+test.py
