@@ -1,6 +1,7 @@
 import functions_framework
 import os
 from set_environment_variables import set_env_vars
+import calenderfeeds as cf
 
 @functions_framework.http
 def update_calendar_endpoint():
@@ -61,7 +62,6 @@ def update_calendar_endpoint():
     }
 
     days_in_advance = 100
-    import calenderfeeds as cf
     cf.generate_calendarfeed(days_in_advance, config, 'latest_calendar')
 
 def main():
