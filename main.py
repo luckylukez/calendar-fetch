@@ -1,7 +1,10 @@
 import functions_framework
+import os
+from set_environment_variables import set_env_vars
 
 @functions_framework.http
 def update_calendar_endpoint():
+    print(os.environ['EVENTOR_ORG_ID'])
     config = {
         'General': {
             'name': 'Rigor IF'
@@ -31,7 +34,7 @@ def update_calendar_endpoint():
             'cancelled_status_id': '10'
         },
         'EventorApi': {
-            'apikey': '49f9a17c71a54fafa5fc34d04385f30b',
+            'apikey': os.environ.get('EVENTOR_API_KEY'),
             'base_url': 'eventor.orientering.se',
             'members_endpoint': 'https://eventor.orientering.se/api/persons/organisations/',
             'authenticate_endpoint': 'https://eventor.orientering.se/api/authenticatePerson',
@@ -40,7 +43,7 @@ def update_calendar_endpoint():
             'organisation_endpoint': 'https://eventor.orientering.se/api/organisation/',
             'event_base_url': 'https://eventor.orientering.se/Events/Show/',
             'lost_password_url': 'https://eventor.orientering.se/Home/ForgotPassword',
-            'organisation_id': 296,
+            'organisation_id': os.environ.get('EVENTOR_ORG_ID'),
             'district_id': 'your_district_id'
         },
         'Time': {
@@ -63,6 +66,7 @@ def update_calendar_endpoint():
     cf.generate_calendarfeed(days_in_advance, config, 'latest_calendar')
 
 def main():
+    set_env_vars()
     update_calendar_endpoint()
 
 if __name__ == '__main__':
