@@ -3,6 +3,8 @@ import logging
 import os
 from datetime import date, timedelta, time
 
+import cloud_upload
+
 import requests
 from dateutil import parser
 import pytz
@@ -182,12 +184,12 @@ def generate_calendarfeed(days_in_advance: int, config, bucket_name):
     # Add feeds from other webcals
     add_idrottonline_feeds(calendar)
 
-    f = open('./' + config['Calendar']['filename'], 'wb')
-    f.write(calendar.to_ical())
-    f.close()
-    logging.info('Calendar feed created')
+    # f = open('./' + config['Calendar']['filename'], 'wb')
+    # f.write(calendar.to_ical())
+    # f.close()
+    # logging.info('Calendar feed created')
 
-    #google_utils.upload_blob(bucket_name, calendar.to_ical(), 'latest_calendar.ics')
+    cloud_upload.upload_to_bucket(calendar.to_ical())
 
     #return jsonify({'message': 'Calendarfeed successfully generated for next {} days'.format(days_in_advance)})
     print('Calendarfeed successfully generated for next {} days'.format(days_in_advance))

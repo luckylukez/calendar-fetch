@@ -1,7 +1,7 @@
 import functions_framework
 
 @functions_framework.http
-def update_calendar_endpoint(request):
+def update_calendar_endpoint():
     config = {
         'General': {
             'name': 'Rigor IF'
@@ -57,11 +57,14 @@ def update_calendar_endpoint(request):
             'Internationell tävling':6
         }
     }
-    print(config['General']['name'])
 
     days_in_advance = 100
-
-
     import calenderfeeds as cf
     cf.generate_calendarfeed(days_in_advance, config, 'latest_calendar')
+
+def main():
+    update_calendar_endpoint()
+
+if __name__ == '__main__':
+    main()
 

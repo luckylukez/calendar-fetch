@@ -1,3 +1,4 @@
 *.ics
 *.ical
 .cfg
+*.json
