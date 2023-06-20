@@ -4,7 +4,6 @@ from set_environment_variables import set_env_vars
 
 @functions_framework.http
 def update_calendar_endpoint():
-    print(os.environ['EVENTOR_ORG_ID'])
     config = {
         'General': {
             'name': 'Rigor IF'
